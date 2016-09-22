@@ -1,0 +1,6 @@
+{% include 'articles/includes/menu.html' %}
+<h2>{{ article.title }}</h2>
+<h3>{{ article.author }}</h3>
+<img src="{{ article.url }}" alt="{{ article.title }}" height="300">
+<p>{{ article.text }}</p>
+<h5>{{ article.publication_date }}</h5>

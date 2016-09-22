@@ -1,0 +1,8 @@
+{% block body %}
+    {% include 'articles/includes/menu.html' %}
+    {% for blog in blogs_list %}
+        <li>
+            <a href="/blogs/{{ blog.username }}">{{ blog.username }}</a>
+        </li>
+    {% endfor %}
+{% endblock %}

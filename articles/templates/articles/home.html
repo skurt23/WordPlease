@@ -1,0 +1,10 @@
+{% block body %}
+    {% include 'articles/includes/menu.html' %}
+    <h1>Bienvenido a WordPlease!</h1>
+    <p>Como Medium pero en versión pobre</p>
+
+    {% if article_list|length > 0 %}
+        <h2>Últimas artículos publicados</h2>
+    {% include "articles/includes/article_loop.html" %}
+    {% endif %}
+{% endblock %}

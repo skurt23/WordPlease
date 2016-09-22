@@ -1,0 +1,16 @@
+{% include 'articles/includes/menu.html' %}
+<h2>{{ username | title }}</h2>
+{% include 'articles/includes/article_loop.html' %}
+<div>
+    <span>
+        {% if article_list.has_previous %}
+            <a href="?page={{ article_list.previous_page_number }}">previous</a>
+        {% endif %}
+        <span>
+            Page {{ article_list.number }} of {{ article_list.paginator.num_pages }}
+        </span>
+        {% if article_list.has_next %}
+            <a href="?page={{ article_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
