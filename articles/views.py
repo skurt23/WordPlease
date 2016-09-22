@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -21,9 +22,8 @@ class HomeView(View):
         :return: objeto HttpResponse con los datos de la respuesta
         """
         # Recupero todos los artículos de la base de datos y los ordena
-        article = Article.objects.order_by('-publication_date').select_related('author')
-        now = timezone.now()
-        context = {'article_list': article[:10], 'now': now}
+        article = Article.objects.filter(publication_date__lte=timezone.now()).order_by('-publication_date').select_related('author')
+        context = {'article_list': article[:10],}
         return render(request, 'articles/home.html', context)
 
 
@@ -50,9 +50,8 @@ class BlogDetailView(View):
         :param username: username del autor del artículo a recuperar
         :return: objeto HttpResponse con los datos de la respuesta
         """
-        now = timezone.now()
         # Recupero los artículos del usuario correspondiente y les aplico una paginación
-        articles = Article.objects.filter(author__username=username).order_by('-publication_date')
+        articles = Article.objects.filter(author__username=username, publication_date__lte=timezone.now()).order_by('-publication_date')
         paginator = Paginator(articles, 5)
         page = request.GET.get('page')
 
@@ -63,7 +62,7 @@ class BlogDetailView(View):
         except EmptyPage:
             articles = paginator.page(paginator.num_pages)
 
-        context = {'article_list': articles, 'username': username, 'now': now}
+        context = {'article_list': articles, 'username': username,}
         return render(request, 'articles/blog_detail.html', context)
 
 
@@ -117,6 +116,17 @@ class ArticleCreationView(View):
         context = {'form': article_form, 'message': message}
         return render(request, 'articles/article_creation.html', context)
 
+
+class ArticleQueryset(object):
+
+    @staticmethod
+    def get_articles_by_user(user):
+        articles = Article.objects.all().select_related("author")
+        if not user.is_authenticated():
+            articles = articles.filter(publication_date__lte=timezone.now())
+        elif not user.is_superuser:
+            articles = articles.filter(Q(publication_date__lte=timezone.now()) | Q(owner=user))
+        return articles
 
 
 

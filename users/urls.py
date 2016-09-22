@@ -15,15 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-
-from articles import urls as articles_urls
-from users import urls as users_urls
-
+from articles.views import HomeView, BlogsView, BlogDetailView, ArticleDetailView, ArticleCreationView
 
 urlpatterns = [
-    url(r'^admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
-    url(r'^sudo/', admin.site.urls),
-    url(r'^accounts/', include('allauth.urls')),
-    url(r'', include(articles_urls)),
-    url(r'', include(users_urls)),
 ]

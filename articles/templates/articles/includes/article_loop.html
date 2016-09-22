@@ -1,10 +1,8 @@
 {% for article in article_list %}
-    {% if now > article.publication_date %}
         <img src="{{ article.url }}" alt="{{ article.title }}" title="{{ article.title }}" height="140">
         <a href="/blogs/{{ article.author.username }}/{{ article.pk }}">
             <h2>{{article.title}}</h2>
         </a>
         <p>{{article.small_text}}</p>
         <h5>{{ article.publication_date }}</h5>
-    {% endif %}
 {% endfor %}
