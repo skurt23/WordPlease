@@ -18,7 +18,7 @@ class Article(models.Model):
     url = models.URLField(null=True)
     text = models.TextField()
     small_text = models.CharField(max_length=300)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, related_name='articles')
     creation_date = models.DateTimeField(auto_now_add=True)
     modification_date = models.DateTimeField(auto_now=True)
     publication_date = models.DateTimeField()

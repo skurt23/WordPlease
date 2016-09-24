@@ -7,7 +7,7 @@ from articles.models import Article, Category
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'publication_date', 'small_text',)
     list_filter = ('categories',)
-    search_fields = ('title', 'text', 'small_text')
+    search_fields = ('title', 'author__username', 'text', 'small_text')
     readonly_fields = ('creation_date', 'modification_date')
 
     fieldsets = (
