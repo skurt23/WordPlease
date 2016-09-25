@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from articles.models import Article
 from django.forms import ModelForm
 
