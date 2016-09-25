@@ -1,11 +1,15 @@
 from rest_framework.routers import DefaultRouter
 from django.conf.urls import url, include
 
-from articles.api import BlogListViewSet
+from articles.api import BlogDetailViewSet
 from articles.views import HomeView, BlogsView, BlogDetailView, ArticleDetailView, ArticleCreationView
 
-router = DefaultRouter()
+articles=BlogDetailViewSet.as_view({
+    'get': 'list'
+})
 
+router = DefaultRouter()
+router.register('api/1.0/blog/(?P<username>\w+)', BlogDetailViewSet, base_name='api_blogs_detail')
 
 
 

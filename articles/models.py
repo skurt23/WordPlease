@@ -22,7 +22,6 @@ class Article(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     modification_date = models.DateTimeField(auto_now=True)
     publication_date = models.DateTimeField()
-    like = models.BooleanField(default=False)
     categories = models.ManyToManyField(Category)
 
     def __str__(self):

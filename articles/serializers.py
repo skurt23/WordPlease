@@ -1,15 +1,25 @@
 from rest_framework import serializers
 
-class UserBlogListSerializer(serializers.Serializer):
+from articles.models import Article
 
-    id = serializers.ReadOnlyField()
-    author = serializers.CharField()
-    blog_url = serializers.SerializerMethodField()
-    articles = serializers.SerializerMethodField()
 
-    def get_blog_url(self, obj):
-        url = 'http://127.0.0.1:8000/blogs/'
-        return url + obj.author.username
+class ArticleSerializer(serializers.ModelSerializer):
 
-    def get_articles(self, obj):
-        return obj.article.length
+    author = serializers.SerializerMethodField()
+
+    def get_author(self, obj):
+        return obj.author.first_name + ' ' + obj.author.last_name
+
+    class Meta:
+        model = Article
+
+
+class ArticleListSerializer(ArticleSerializer):
+
+    author = serializers.SerializerMethodField()
+
+    def get_author(self, obj):
+        return obj.author.first_name + ' ' + obj.author.last_name
+
+    class Meta(ArticleSerializer.Meta):
+        fields = ('id', 'title', 'url', 'small_text', 'publication_date', 'author')

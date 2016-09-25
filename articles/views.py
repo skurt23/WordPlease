@@ -133,5 +133,22 @@ class ArticleQueryset(object):
         return articles
 
 
+class ArticleListApiQueryset(object):
+
+    @staticmethod
+    def get_articles_by_user(user, username):
+        articles = Article.objects.all().select_related("author")
+        if not user.is_authenticated():
+            articles = articles.filter(publication_date__lte=timezone.now(), author__username=username)
+        elif not user.is_superuser:
+            if user.username == username:
+                articles = articles.filter(author=user)
+            else:
+                articles = articles.filter(publication_date__lte=timezone.now(), author__username=username)
+        else:
+            articles = articles.filter(author__username=username)
+        return articles
+
+
 
 
