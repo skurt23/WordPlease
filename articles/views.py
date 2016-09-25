@@ -22,7 +22,7 @@ class HomeView(View):
         """
         # Recupero todos los artículos de la base de datos y los ordena
         article = Article.objects.filter(publication_date__lte=timezone.now()).order_by('-publication_date')
-        context = {'article_list': article[:10],}
+        context = {'article_list': article[:12],}
         return render(request, 'articles/home.html', context)
 
 
@@ -36,7 +36,7 @@ class BlogsView(View):
         """
         # Recupero los usuarios de la base de datos y los ordeno alfabéticamente
         blog = User.objects.order_by('-username')
-        context = {'blogs_list': blog[:10]}
+        context = {'blogs_list': blog[:12]}
         return render(request, 'articles/blogs.html', context)
 
 
@@ -51,7 +51,7 @@ class BlogDetailView(View):
         """
         # Recupero los artículos del usuario correspondiente y les aplico una paginación
         articles = ArticleQueryset.get_articles_by_user(request.user, username).order_by('-publication_date')
-        paginator = Paginator(articles, 5)
+        paginator = Paginator(articles, 12)
         page = request.GET.get('page')
 
         try:
@@ -122,7 +122,7 @@ class ArticleQueryset(object):
     def get_articles_by_user(user, username):
         articles = Article.objects.all().select_related("author")
         if not user.is_authenticated():
-            articles = articles.filter(publication_date__lte=timezone.now())
+            articles = articles.filter(publication_date__lte=timezone.now(), author__username=username)
         elif not user.is_superuser:
             if user.username == username:
                 articles = articles.filter(author=user)

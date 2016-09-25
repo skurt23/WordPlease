@@ -7,7 +7,7 @@ from django.utils import timezone
 
 from articles.permissions import ArticlePermission
 from articles.serializers import ArticleListSerializer, ArticleSerializer
-from articles.views import ArticleListApiQueryset, ArticleQueryset
+from articles.views import ArticleQueryset
 
 
 class BlogDetailViewSet(ModelViewSet):
@@ -25,7 +25,7 @@ class BlogDetailViewSet(ModelViewSet):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
 
     def get_queryset(self):
-        return ArticleListApiQueryset.get_articles_by_user(self.request.user, self.kwargs['username'])
+        return ArticleQueryset.get_articles_by_user(self.request.user, self.kwargs['username'])
 
     def get_serializer_class(self):
         if self.action != 'list':

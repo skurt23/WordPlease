@@ -1,8 +1,25 @@
 {% for article in article_list %}
-        <img src="{{ article.url }}" alt="{{ article.title }}" title="{{ article.title }}" height="140">
-        <a href="/blogs/{{ article.author.username }}/{{ article.pk }}">
-            <h2>{{article.title}}</h2>
-        </a>
-        <p>{{article.small_text}}</p>
-        <h5>{{ article.publication_date }}</h5>
+    <div class="col s12 m6 l4">
+        <div class="card" style="height: 400px">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img src="{{ article.url }}" alt="{{ article.title }}" title="{{ article.title }}" height="250">
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text  text-darken-4">
+                   <a href="{% url 'article_detail' article.author.username article.pk %}">
+                    {{article.title}}
+                    </a>
+                    <i class="material-icons right">more_vert</i>
+                </span>
+                <p>{{ article.publication_date }}</p>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text  text-darken-4">
+                    {{ article.title }}
+                    <i class="material-icons right">close</i>
+                </span>
+                <p>{{article.small_text}}</p>
+            </div>
+        </div>
+    </div>
 {% endfor %}

@@ -1,6 +1,16 @@
-{% include 'articles/includes/menu.html' %}
-<h2>{{ article.title }}</h2>
-<h3>{{ article.author }}</h3>
-<img src="{{ article.url }}" alt="{{ article.title }}" height="300">
-<p>{{ article.text }}</p>
-<h5>{{ article.publication_date }}</h5>
+{% extends 'template.html' %}
+{% block body %}
+    <h2 style="color: #ee6e73">{{ article.title }}</h2>
+    <div class="chip">
+        <img src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.png" alt="User IMG">
+        {{ article.author }}
+    </div>
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <img src="{{ article.url }}" alt="{{ article.title }}" height="300" width="100%">
+        </div>
+    </div>
+
+    <p>{{ article.text }}</p>
+    <h5 class="center-align" style="color: #ee6e73">Fecha de subida: {{ article.publication_date }}</h5>
+{% endblock %}

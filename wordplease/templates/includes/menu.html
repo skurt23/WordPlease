@@ -1,0 +1,32 @@
+<nav>
+    <div class="nav-wrapper">
+      <a href="{% url 'article_home' %}" class="brand-logo" style="margin-left: 10px;">WordPlease</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{% url 'article_home' %}">Inicio</a></li>
+        <li><a href="{% url 'blogs_list' %}">Blogs</a></li>
+        {% if user.is_authenticated %}
+            <div class="fixed-action-btn" style="bottom: 45px; right: 24px">
+                <a href="{% url 'article_creation' %}" class="btn-floating waves-effect waves-light btn-large" style="background-color: #ee6e73">
+                    <i class="material-icons">add</i>
+                </a>
+            </div>
+            <li><a href="/accounts/logout">Cerrar sesión</a></li>
+        {% else %}
+            <li><a href="/accounts/login">Iniciar sesión</a></li>
+            <li><a href="/accounts/signup">Registrarse</a></li>
+        {% endif %}
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="{% url 'article_home' %}">Inicio</a></li>
+        <li><a href="{% url 'blogs_list' %}">Blogs</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'article_creation' %}">Crear artículo</a></li>
+            <li><a href="/accounts/logout">Cerrar sesión</a></li>
+        {% else %}
+            <li><a href="/accounts/login">Iniciar sesión</a></li>
+            <li><a href="/accounts/signup">Registrarse</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>

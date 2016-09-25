@@ -1,10 +1,39 @@
+{% extends 'template.html' %}
 {% block body %}
-    {% include 'articles/includes/menu.html' %}
-    <h1>Bienvenido a WordPlease!</h1>
-    <p>Como Medium pero en versión pobre</p>
-
+    <div class="slider" style="margin-top:20px; height: 440px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+        <ul class="slides" style="height: 400px;">
+          <li style="opacity: 0; transform: translateX(0px) translateY(0px);">
+            <img src="http://estrategias-marketing-online.com/wp-content/uploads/2013/09/blogging-employees1.jpg">
+            <div class="caption left-align" style="opacity: 0; transform: translateX(-100px) translateY(0px);">
+              <h3 style="color: #ee6e73">WordPlease</h3>
+              <h4 class="grey-text text-darken-3">Como Medium pero en pobre</h4>
+            </div>
+          </li>
+          <li style="opacity: 0; transform: translateX(0px) translateY(0px);">
+            <img src="http://www.winningwaysinc.com/wp-content/uploads/2014/02/blog.jpg">
+            <div class="caption left-align" style="opacity: 0; transform: translateX(-100px) translateY(0px);">
+              <h2 class="grey-text text-darken-3">Crea tu propio blog</h2>
+              <h4 style="color: #ee6e73">y conviértete en un gran blogger</h4>
+            </div>
+          </li>
+          <li style="opacity: 0; transform: translateX(0px) translateY(0px);">
+            <img src="https://tellado.es/wp-content/uploads/2013/11/blog.jpg">
+            <div class="caption right-align" style="opacity: 0; transform: translateX(-100px) translateY(0px);">
+              <h2 style="color: #ee6e73">Escribe artículos</h2>
+              <h4 class="grey-text text-darken-3">
+                  da rienda suelta a tu imaginación
+              </h4>
+            </div>
+          </li>
+        </ul>
+        <ul class="indicators">
+            <li class="indicator-item"></li>
+            <li class="indicator-item"></li>
+            <li class="indicator-item"></li>
+        </ul>
+    </div>
     {% if article_list|length > 0 %}
-        <h2>Últimas artículos publicados</h2>
+        <h4 class="center-align">Últimas artículos publicados</h4>
     {% include "articles/includes/article_loop.html" %}
     {% endif %}
 {% endblock %}

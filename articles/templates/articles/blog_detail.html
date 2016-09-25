@@ -1,16 +1,18 @@
-{% include 'articles/includes/menu.html' %}
-<h2>{{ username | title }}</h2>
-{% include 'articles/includes/article_loop.html' %}
-<div>
-    <span>
-        {% if article_list.has_previous %}
-            <a href="?page={{ article_list.previous_page_number }}">previous</a>
-        {% endif %}
-        <span>
-            Page {{ article_list.number }} of {{ article_list.paginator.num_pages }}
+{% extends 'template.html' %}
+{% block body %}
+    <h2 class="center-align">{{ username | title }}</h2>
+    {% include 'articles/includes/article_loop.html' %}
+    <div class="col s12 m12 l12">
+        <span class="center">
+            {% if article_list.has_previous %}
+                <a class="center-block" href="?page={{ article_list.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span class="center-block">
+                Page {{ article_list.number }} of {{ article_list.paginator.num_pages }}
+            </span>
+            {% if article_list.has_next %}
+                <a class="center-block" href="?page={{ article_list.next_page_number }}">Next</a>
+            {% endif %}
         </span>
-        {% if article_list.has_next %}
-            <a href="?page={{ article_list.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
+    </div>
+{% endblock %}

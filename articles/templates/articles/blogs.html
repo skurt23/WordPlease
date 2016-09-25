@@ -1,8 +1,21 @@
+{% extends 'template.html' %}
 {% block body %}
-    {% include 'articles/includes/menu.html' %}
-    {% for blog in blogs_list %}
-        <li>
-            <a href="/blogs/{{ blog.username }}">{{ blog.username }}</a>
-        </li>
-    {% endfor %}
+    <table class="col s12 m12 l12">
+        <thead>
+          <tr>
+              <th data-field="id">Blog</th>
+              <th data-field="name">Propietario</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for blog in blogs_list %}
+            <tr>
+                <td><a href="{% url 'blog_detail' blog.username %}">{{ blog.username | title }}</a></td>
+                <td>{{ blog.first_name }} {{ blog.last_name }} </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
 {% endblock %}
