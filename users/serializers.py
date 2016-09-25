@@ -13,7 +13,7 @@ class UserBlogListSerializer(serializers.Serializer):
     articles = serializers.SerializerMethodField()
 
     def get_blog_url(self, obj):
-        url = 'http://127.0.0.1:8000/blogs/'
+        url = 'http://127.0.0.1:8000/api/1.0/blog/'
         return url + obj.username
 
     def get_articles(self, obj):
