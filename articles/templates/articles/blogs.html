@@ -5,6 +5,7 @@
           <tr>
               <th data-field="id">Blog</th>
               <th data-field="name">Propietario</th>
+              <th data-field="name">Nº de artículos</th>
           </tr>
         </thead>
 
@@ -13,6 +14,7 @@
             <tr>
                 <td><a href="{% url 'blog_detail' blog.username %}">{{ blog.username | title }}</a></td>
                 <td>{{ blog.first_name }} {{ blog.last_name }} </td>
+                <td>{{ blog.articles.count }} </td>
             </tr>
           {% endfor %}
         </tbody>
